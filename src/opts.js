@@ -394,10 +394,6 @@ function cursorPointSize(self, si) {
 	return sp.size;
 }
 
-function dataIdx(self, seriesIdx, cursorIdx) {
-	return cursorIdx;
-}
-
 const moveTuple = [0,0];
 
 function cursorMove(self, mouseLeft1, mouseTop1) {
@@ -425,6 +421,7 @@ export const cursorOpts = {
 	lock: false,
 	move: cursorMove,
 	points: {
+		one:    false,
 		show:   cursorPointShow,
 		size:   cursorPointSize,
 		width:  0,
@@ -459,14 +456,21 @@ export const cursorOpts = {
 	},
 
 	focus: {
+		dist: (self, seriesIdx, dataIdx, valPos, curPos) => valPos - curPos,
 		prox: -1,
+		bias: 0,
+	},
+
+	hover: {
+		skip: [void 0],
+		prox: null,
 		bias: 0,
 	},
 
 	left: -10,
 	top: -10,
 	idx: null,
-	dataIdx,
+	dataIdx: null,
 	idxs: null,
 
 	event: null,
