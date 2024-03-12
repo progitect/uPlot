@@ -4,7 +4,7 @@
 *
 * uPlot.js (μPlot)
 * A small, fast chart for time series, lines, areas, ohlc & bars
-* https://github.com/leeoniya/uPlot (v1.6.30)
+* https://github.com/leeoniya/uPlot (v1.6.30-custom)
 */
 
 const FEAT_TIME          = true;
@@ -5129,8 +5129,10 @@ function uPlot(opts, data, then) {
 
 				let j = 0;
 
-				for (let k in vals)
-					legendCells[i][j++].firstChild.nodeValue = vals[k];
+				for (let k in vals) {
+          if (legendCells[i][j].firstChild?.nodeValue)
+            legendCells[i][j++].firstChild.nodeValue = vals[k];
+        }
 			}
 		}
 	}
